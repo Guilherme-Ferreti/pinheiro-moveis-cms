@@ -134,3 +134,17 @@
       </li>
     </ul>
   </nav>
+
+<aside class="control-sidebar control-sidebar-dark">
+    <div class="p-3">
+        <h5>Account</h5>
+        </button>
+        <a href="#" onclick="document.getElementById('logout-form').submit();">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="post" style="display:none;">
+            @csrf
+        </form>
+    </div>
+</aside>
