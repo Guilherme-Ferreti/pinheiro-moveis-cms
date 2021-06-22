@@ -1,12 +1,6 @@
-@props(['disabled' => false])
+@props(['hasError' => $errors->has($attributes['name'])])
 
-<input 
-    {{ $attributes->merge([
-        'class' => 'form-control' . ($errors->has($attributes['name']) ? ' is-invalid' : '')
-    ]) }}
-
-    {{ $disabled ? 'disabled' : '' }}
-/>
+<input {{ $attributes->class(['form-control', 'is-invalid' => $hasError]) }} />
 
 <div class="input-group-append">
     <div class="input-group-text">
@@ -14,6 +8,6 @@
     </div>
 </div>
 
-@error ($attributes['name'])
+@if ($hasError)
     <span class="error invalid-feedback">{{ $errors->first($attributes['name']) }}</span>
-@enderror
+@endif
