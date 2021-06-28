@@ -12,6 +12,18 @@ class PriceList extends Model
 
     protected $fillable = ['name', 'started_at', 'ended_at'];
 
+    protected $casts = [
+        'started_at' => 'datetime',
+        'ended_at' => 'datetime',
+    ];
+
+    public function scopeCurrent($query)
+    {
+        $query
+            ->whereDate('started_at', '<=', now())
+            ->whereDate('ended_at', '>=', now());
+    }
+
     public function prices()
     {
         return $this->hasMany(Price::class);
