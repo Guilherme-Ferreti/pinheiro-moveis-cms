@@ -26,8 +26,6 @@ class FileFactory extends Factory
             'name' => $this->faker->word(),
             'mime_type' => $this->faker->mimeType(),
             'url' => $this->faker->url(),
-            'fileable_id' => Product::factory()->create(),
-            'fileable_type' => Product::class,
         ];
     }
 }

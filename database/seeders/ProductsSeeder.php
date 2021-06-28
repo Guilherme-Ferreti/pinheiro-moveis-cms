@@ -24,6 +24,7 @@ class ProductsSeeder extends Seeder
         foreach ($products as $product) {
             File::factory(5)->create([
                 'fileable_id' => $product->id,
+                'fileable_type' => Product::class,
             ]);
 
             foreach ($states as $state) {
