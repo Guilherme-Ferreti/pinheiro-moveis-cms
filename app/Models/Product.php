@@ -29,11 +29,13 @@ class Product extends Model
         return $this->hasMany(Price::class);
     }
 
-    public function currentPrice(int $state_id = self::DEFAULT_PRICING_STATE)
+    public function currentPricing(int $state_id = self::DEFAULT_PRICING_STATE)
     {
         return $this->prices()
+                ->whereHas('priceList', function ($query) {
+                    $query->current();
+                })
                 ->where('state_id', $state_id)
-                ->first()
-                ->price;
+                ->first();
     }
 }
