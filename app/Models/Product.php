@@ -29,7 +29,7 @@ class Product extends Model
         return $this->hasMany(Price::class);
     }
 
-    public function currentPricing(int $state_id = self::DEFAULT_PRICING_STATE)
+    public function currentPricing(int $state_id = self::DEFAULT_PRICING_STATE) : ?Price
     {
         return $this->prices()
                 ->whereHas('priceList', function ($query) {
@@ -37,5 +37,29 @@ class Product extends Model
                 })
                 ->where('state_id', $state_id)
                 ->first();
+    }
+
+    public function isAvailable(int $state_id = self::DEFAULT_PRICING_STATE) : bool
+    {
+        return $this->hasPrice($state_id) && $this->hasStock();
+    }
+
+    public function hasPrice(int $state_id = self::DEFAULT_PRICING_STATE) : bool
+    {
+        $price = $this->currentPricing($state_id);
+
+        return $price ? (bool) $price->amount : false;
+    }
+
+    public function hasStock() : bool
+    {
+        return (bool) $this->stock;
+    }
+
+    public function getStockAttribute () : int
+    {
+        // TODO: create stock functionality
+
+        return 0;
     }
 }
