@@ -18,7 +18,7 @@ class CreatePricesTable extends Migration
             $table->foreignId('price_list_id')->constrained('price_lists')->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('state_id')->constrained()->cascadeOnDelete();
-            $table->decimal('price', 15);
+            $table->decimal('amount', 15);
             $table->timestamps();
             $table->softDeletes();
         });

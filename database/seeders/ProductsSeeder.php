@@ -31,7 +31,7 @@ class ProductsSeeder extends Seeder
                 $product->prices()->create([
                     'price_list_id' => $priceList->id,
                     'state_id' => $state->id,
-                    'price' => rand(1, 5000) / 10
+                    'amount' => rand(1, 5000) / 10
                 ]);
             }
         }
