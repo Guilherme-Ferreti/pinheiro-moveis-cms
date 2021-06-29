@@ -31,12 +31,26 @@ class Product extends Model
 
     public function currentPricing(int $state_id = self::DEFAULT_PRICING_STATE) : ?Price
     {
-        return $this->prices()
-                ->whereHas('priceList', function ($query) {
-                    $query->current();
-                })
-                ->where('state_id', $state_id)
-                ->first();
+        return Price::select('prices.*')
+            ->join('price_lists', function ($join) {
+                $join->on('prices.price_list_id', '=', 'price_lists.id')
+                        ->whereDate('price_lists.started_at', '<=', now())
+                        ->whereDate('price_lists.ended_at', '>=', now());
+            })
+            ->where('prices.state_id', $state_id)
+            ->where('prices.product_id', $this->id)
+            ->first();
+
+        /*  
+            Notice: whereHas implementation replaced by join clauses for better performance
+            
+            return $this->prices()
+                    ->whereHas('priceList', function ($query) {
+                        $query->current();
+                    })
+                    ->where('state_id', $state_id)
+                    ->first();
+        */
     }
 
     public function isAvailable(int $state_id = self::DEFAULT_PRICING_STATE) : bool
