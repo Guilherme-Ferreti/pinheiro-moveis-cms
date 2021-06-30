@@ -27,13 +27,17 @@ class ProductsSeeder extends Seeder
                 'fileable_type' => Product::class,
             ]);
 
+            $prices = [];
+
             foreach ($states as $state) {
-                $product->prices()->create([
+                $prices[] = [
                     'price_list_id' => $priceList->id,
                     'state_id' => $state->id,
                     'amount' => rand(1, 5000) / 10
-                ]);
+                ];
             }
+            
+            $product->prices()->createMany($prices);
         }
     }
 }
