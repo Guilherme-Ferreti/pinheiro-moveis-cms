@@ -1,17 +1,12 @@
 @extends('layouts.app')
 
 @section('content-header')
-<div class="row mb-2">
-    <div class="col-sm-6">
-        <h1 class="m-0">Product Management</h1>
-    </div>
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="fas fa-home"></i></a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('products.index') }}">Products</li></a>
-        </ol>
-    </div>
-</div>
+<x-header title="Product Management">
+    <x-breadcrumb>
+        <x-breadcrumb-item :route="route('dashboard')" icon="fa-home" />
+        <x-breadcrumb-item :route="route('products.index')" name="products" />
+    </x-breadcrumb> 
+</x-header>
 @endsection
 
 @section('content')
@@ -37,10 +32,10 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-sm btn-success">
+                            <a href="{{ route('products.create') }}" class="btn btn-sm btn-success">
                                 <i class="fas fa-plus-circle"></i>
                                 New 
-                            </button>
+                            </a>
                         </div>
                     </div>
                     
