@@ -14,6 +14,13 @@ class Product extends Model
 
     protected $fillable = ['name', 'description', 'slug'];
 
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, fn($query, string $search) => 
+            $query->where('name', 'like', "%$search%")
+        );
+    }
+
     public function files()
     {
         return $this->morphMany(File::class, 'fileable');
