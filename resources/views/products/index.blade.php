@@ -3,7 +3,7 @@
 @section('content-header')
 <x-header title="Product Management">
     <x-breadcrumb>
-        <x-breadcrumb-item :route="route('dashboard')" icon="fa-home" />
+        <x-breadcrumb-item :route="route('home')" icon="fa-home" />
         <x-breadcrumb-item :route="route('products.index')" name="products" />
     </x-breadcrumb> 
 </x-header>
