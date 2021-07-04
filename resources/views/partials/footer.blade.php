@@ -1,8 +1,6 @@
 <footer class="main-footer">
-    <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-    Anything you want
+        <a href="https://github.com/Guilherme-Ferreti" style="text-decoration:none; color:#869099;" target="_blank">By Guilherme</a>
     </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2021-2021 <a href="/">{{ config('app.name', 'Laravel') }}</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2021-{{ now()->year }} <a href="/">{{ config('app.name', 'Laravel') }}</a>.</strong> All rights reserved.
 </footer>
